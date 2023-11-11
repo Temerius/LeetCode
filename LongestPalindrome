@@ -1,0 +1,23 @@
+lass Solution:
+    def longestPalindrome(self, s: str) -> str:
+        substr=s[0]
+        l=len(s)
+        for i in range(1,l):
+            lp = i
+            rp = lp
+            flag = True
+            while flag:
+                if lp > 0:
+                    if rp < l-1 and s[lp-1]==s[rp+1]:
+                        lp-=1
+                        rp+=1
+                    elif s[lp-1:i]==s[i:rp+1][::-1]: # if palindrome even (not the best solution but a can't find better)
+                        lp-=1
+                    else:
+                        flag=False
+                else:
+                    flag=False   
+            tmp = s[lp:rp+1]
+            if len(tmp) > len(substr):
+                substr = tmp
+        return substr 
